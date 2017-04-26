@@ -45,8 +45,8 @@ func New(opts []Options, mode BalanceMode) *Balancer {
 		selector: make(pool, len(opts)),
 		mode:     mode,
 	}
-	for i, opt := range opts {
-		balancer.selector[i] = newRedisBackend(&opt)
+	for i := 0; i < len(opts); i++ {
+		balancer.selector[i] = newRedisBackend(&opts[i])
 	}
 	return balancer
 }
